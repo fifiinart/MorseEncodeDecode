@@ -131,7 +131,8 @@ module.exports = function(type, message) {
       }
     }
     // Split into morse code characters
-    let tokens = message.trim().split(" ");
+    let tokens = message.trim()
+      .split(" ");
     for (let i in tokens) {
       tokens[i] += " ";
       for (let j in morseEncoder) {
