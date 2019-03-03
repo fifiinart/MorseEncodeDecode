@@ -72,86 +72,90 @@ let morseEncoder = {
   "9": "----. ",
   " ": " "
 };
-module.exports = function(type, message) {
-  let request = `${type} "${message}" `
-  if (type === 'encode') {
+module.exports = {
+  morse: function(type, message) {
+    let request = `${type} "${message}" `
+    if (type === 'encode') {
 
-    // Check if message length is 0
-    if (message.length == 0) {
-      return {
-        request,
-        "error": "Cannot Encode Empty Text",
-        "success": false
-      }
-    }
-
-    // Check if message contains only '.' or '-'
-    let unique = [];
-    for (const index in message) {
-      if (!valueIn(message[index], unique) && !(message[index] == "." || message[index] == "-")) {
-        unique.push(message[index]);
-      }
-    }
-
-    if (unique.length == 0) {
-      return {
-        request,
-        "error": "Cannot Encode Morse Code",
-        "success": false
-      }
-    }
-
-    // Encode message; Everything is okay message-wise
-    let result = "";
-    let char;
-    for (const i in message) {
-      char = message[i];
-
-      // Find if char is in morseEncoder
-      if (char in morseEncoder) {
-        result += morseEncoder[char];
-      }
-    }
-
-    return {
-      request,
-      "success": true,
-      "value": result
-    }
-  } else if (type === 'decode') {
-    let chars = [...message.trim()];
-    // Make sure morse code is being decoded
-    for (let i of chars) {
-      if (i !== " " && i !== "-" && i !== ".") {
+      // Check if message length is 0
+      if (message.length == 0) {
         return {
           request,
-          "error": "Can only decode morse code",
+          "error": "Cannot Encode Empty Text",
           "success": false
         }
       }
-    }
-    // Split into morse code characters
-    let tokens = message.trim()
-      .split(" ");
-    for (let i in tokens) {
-      tokens[i] += " ";
-      for (let j in morseEncoder) {
-        // Replace the morse code with the corresponding letter
-        if (morseEncoder[j] === tokens[i]) {
-          tokens[i] = j;
+
+      // Check if message contains only '.' or '-'
+      let unique = [];
+      for (const index in message) {
+        if (!valueIn(message[index], unique) && !(message[index] == "." || message[index] == "-")) {
+          unique.push(message[index]);
         }
       }
+
+      if (unique.length == 0) {
+        return {
+          request,
+          "error": "Cannot Encode Morse Code",
+          "success": false
+        }
+      }
+
+      // Encode message; Everything is okay message-wise
+      let result = "";
+      let char;
+      for (const i in message) {
+        char = message[i];
+
+        // Find if char is in morseEncoder
+        if (char in morseEncoder) {
+          result += morseEncoder[char];
+        }
+      }
+
+      return {
+        request,
+        "success": true,
+        "value": result
+      }
+    } else if (type === 'decode') {
+      let chars = [...message.trim()];
+      // Make sure morse code is being decoded
+      for (let i of chars) {
+        if (i !== " " && i !== "-" && i !== ".") {
+          return {
+            request,
+            "error": "Can only decode morse code",
+            "success": false
+          }
+        }
+      }
+      // Split into morse code characters
+      let tokens = message.trim()
+        .split(" ");
+      for (let i in tokens) {
+        tokens[i] += " ";
+        for (let j in morseEncoder) {
+          // Replace the morse code with the corresponding letter
+          if (morseEncoder[j] === tokens[i]) {
+            tokens[i] = j;
+          }
+        }
+      }
+      return {
+        request,
+        "success": true,
+        "value": tokens.join("")
+      }
+    } else {
+      return {
+        request,
+        "error": "type is not encode or decode",
+        "success": false
+      }
     }
-    return {
-      request,
-      "success": true,
-      "value": tokens.join("")
-    }
-  } else {
-    return {
-      request,
-      "error": "type is not encode or decode",
-      "success": false
-    }
-  }
+  },
+  version: require("./package.json")
+    .version
 }
