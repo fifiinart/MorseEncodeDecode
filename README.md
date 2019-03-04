@@ -1,6 +1,10 @@
 # Morse Encode-Decode
 
-This is an npm module created for encoding and decoding morse code. Install it [here](https://www.npmjs.com/package/morse-encode-decode) or use `npm i morse-encode-decode`.
+This is an npm module created for encoding and decoding morse code. Install it [here](https://www.npmjs.com/package/morse-encode-decode) or use the following npm command:
+
+```
+npm i morse-encode-decode
+```
 
 ## How to use Morse Encode-Decode
 
