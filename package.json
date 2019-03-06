@@ -1,6 +1,6 @@
 {
   "name": "morse-encode-decode",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A morse encoder/decoder API",
   "main": "morse.js",
   "scripts": {
