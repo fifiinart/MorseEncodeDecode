@@ -7,8 +7,8 @@ npm i morse-encode-decode
 ```
 
 ## How to use Morse Encode-Decode
-
-The `morse()` function has two parameters: `type` and `message`. `type` is whether you want to encode or decode text, and `message` is the text to encode and decode.
+The package contains an object with two properties: `morse` and `version`. `version` is the version of the package.
+The `morse()` method has two parameters: `type` and `message`. `type` is whether you want to encode or decode text, and `message` is the text to encode and decode.
 
 `morse` will return one of two objects:
 
