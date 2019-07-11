@@ -2,9 +2,7 @@
 
 This is an npm module created for encoding and decoding morse code. Install it [here](https://www.npmjs.com/package/morse-encode-decode) or use the following npm command:
 
-```
-npm i morse-encode-decode
-```
+[![npm i morse-encode-decode](https://nodei.co/npm/morse-encode-decode.png)](https://nodei.co/npm/morse-encode-decode/)
 
 ## How to use Morse Encode-Decode
 The package contains an object with two properties: `morse` and `version`. `version` is the version of the package.
